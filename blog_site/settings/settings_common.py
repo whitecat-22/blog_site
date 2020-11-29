@@ -130,10 +130,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 
-MEDIA_ROOT = 'usr/share/nginx/html/media'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'staticfiels', 'media_root')
 MEDIA_URL = '/media/'
 
-STATIC_ROOT = '/usr/share/nginx/html/static'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiels', 'static_root')
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
