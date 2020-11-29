@@ -144,6 +144,3 @@ STATICFILES_DIRS = [
 # バックアップ用
 BACKUP_PATH ="backup/"
 NUM_SAVED_BACKUP = 30
-
-
-AUTH_USER_MODEL = 'blog.CustomUser'
