@@ -140,3 +140,10 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
+
+# バックアップ用
+BACKUP_PATH ="backup/"
+NUM_SAVED_BACKUP = 30
+
+
+AUTH_USER_MODEL = 'blog.CustomUser'
