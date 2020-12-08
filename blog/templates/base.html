@@ -1,0 +1,52 @@
+{% load static %}
+
+<html lang="ja">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shlink-to-fit=no">
+        <meta name="description" content="{% block description %}しろねこプロダクト：自作のサービス紹介やポートフォリオ、ブログを運営していきます。{% endblock %}">
+        <meta name="author" content="">
+
+        <!-- favicon -->
+        <link rel="icon" href="{% static 'img/favicon.ico' %}">
+
+        <title>{% block title %}しろねこブログ{% endblock %}</title>
+
+        <!-- Fontawesome -->
+        <link rel="styleseet" href="https://use/fontawesome.com/releases/v5.15.1/css/all.css">
+
+        <!-- Bootstrap core CSS -->
+        <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+        <!-- Custom styles for this templates -->
+<!--
+        <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+-->
+
+        <!-- Custom styles for this template -->
+        <link href="{% static 'css/modern-business.css' %}" rel="stylesheet">
+
+        <link href="{% static 'css/mystyle.css' %}" type="text/css" rel="stylesheet">
+
+        {% block head %}{% endblock %}
+    </head>
+
+    <body>
+        <div id="wrapper">
+            <!-- Navigation -->
+            {% include "snippets/nav_bar.html" %}
+
+            {% block contents %}{% endblock %}
+
+            <!-- Footer -->
+            {% include "snippets/footer.html" %}
+
+            <!-- Bootstrap core JavaScript -->
+            <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+            <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+            <script type="text/javascript" src="https://use.fontawesome.com/releases/v5.15.1/js/conflict-detection.js"></script>
+
+    </body>
+</html>

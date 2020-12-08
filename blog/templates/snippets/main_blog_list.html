@@ -1,0 +1,49 @@
+{% load static %}
+{% for post in object_list %}
+
+    <style type="text/css">
+    .textOverflow {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow:ellipsis;
+        }
+    </style>
+
+    {% if user.is_authenticated or post.is_public %}
+        <div class="card lg-4 mb-4">
+            <div class="card-h-100">
+            {% if not post.is_public %}
+                <h5><span class="badge badge-secondary">Draft</span></h5>
+            {% endif %}
+                <h4 class="card-header">{{ post.title }}</h4>
+                <div class="card-body">
+                    <p class="card-text">
+                        {{ post.content|safe }}
+                    </p>
+                </div>
+                <div class="card-footer">
+                    <p class="card-text">
+                        {{ post.published_at|date }}
+                    </p>
+                    <a href="{% url 'blog:blog_detail' post.pk %}" class="btn btn-primary">Read More</a>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+{% empty %}
+        <div class="card lg-4 mb-4">
+            <div class="card-h-100">
+                <h4 class="card-header">Coming Soon</h4>
+                <div class="card-body">
+                    <p class="card-text">
+                    </p>
+                </div>
+                <div class="card-footer">
+                    <p class="card-text">
+                    </p>
+                    <a href="#" class="btn btn-primary disabled">Read More</a>
+                </div>
+            </div>
+        </div>
+{% endfor %}

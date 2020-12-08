@@ -12,7 +12,7 @@ from blog.models import Post, Category, Tag, Comment   # Reply
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic.edit import CreateView
-from blog.forms import CommentForm, ReplyForm
+from blog.forms import CommentForm  #ReplyForm
 
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView
@@ -24,29 +24,23 @@ from .forms import ContactForm
 logger = logging.getLogger(__name__)
 
 
-class IndexView(ListView):
+class IndexView(TemplateView):
+    template_name = 'index.html'
+
+
+class BlogListView(ListView):
     model = Post
-    template_name = 'blog/index.html'
+    template_name = 'blog.html'
     paginate_by = 3
 
+    def get_queryset(self):
+        blogs = Post.objects.order_by('-created_at')
+        return blogs
 
-class PostDetailView(DetailView):
-    model = Post
-
-    def get_object(self, queryset=None):
-        obj = super().get_object(queryset=queryset)
-        if not obj.is_public and not self.request.user.is_authenticated:
-            raise Http404
-        return obj
-
-
-class CategoryListView(ListView):
-    queryset = Category.objects.annotate(
-        num_posts=Count('post', filter=Q(post__is_public=True)))
 
 class CategoryPostView(ListView):
     model = Post
-    template_name = 'blog/category_post.html'
+    template_name = 'category_post.html'
 
     def get_queryset(self):
         category_slug = self.kwargs['category_slug']
@@ -60,13 +54,9 @@ class CategoryPostView(ListView):
         return context
 
 
-class TagListView(ListView):
-    queryset = Tag.objects.annotate(num_posts=Count(
-        'post', filter=Q(post__is_public=True)))
-
 class TagPostView(ListView):
     model = Post
-    template_name = 'blog/tag_post.html'
+    template_name = 'tag_post.html'
 
     def get_queryset(self):
         tag_slug = self.kwargs['tag_slug']
@@ -80,9 +70,19 @@ class TagPostView(ListView):
         return context
 
 
+class PostDetailView(DetailView):
+    model = Post
+
+    def get_object(self, queryset=None):
+        obj = super().get_object(queryset=queryset)
+        if not obj.is_public and not self.request.user.is_authenticated:
+            raise Http404
+        return obj
+
+
 class SearchPostView(ListView):
     model = Post
-    template_name = 'blog/search_post.html'
+    template_name = 'search_post.html'
     paginate_by = 3
 
     def get_queryset(self):
@@ -105,6 +105,15 @@ class SearchPostView(ListView):
         context['query'] = query
         return context
 
+
+class CategoryListView(ListView):
+    queryset = Category.objects.annotate(
+        num_posts=Count('post', filter=Q(post__is_public=True)))
+
+
+class TagListView(ListView):
+    queryset = Tag.objects.annotate(num_posts=Count(
+        'post', filter=Q(post__is_public=True)))
 
 
 class CommentFormView(CreateView):
@@ -173,7 +182,7 @@ def comment_remove(request, pk):
 
 
 class ContactFormView(FormView):
-    template_name = 'contact/contact_form.html'
+    template_name = 'contact.html'
     form_class = ContactForm
     success_url = '/contact_result/'
 
@@ -184,7 +193,7 @@ class ContactFormView(FormView):
 
 
 class ContactResultView(TemplateView):
-    template_name = 'contact/contact_result.html'
+    template_name = 'contact_result.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

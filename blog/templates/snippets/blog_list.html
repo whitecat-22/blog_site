@@ -1,0 +1,65 @@
+{% load static %}
+{% load markdown_html %}
+    <!-- highlight.js関連の読み込み -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+{% for post in object_list %}
+
+    <style type="text/css">
+    .textOverflow {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow:ellipsis;
+        }
+    </style>
+
+    {% if user.is_authenticated or post.is_public %}
+        <!-- Blog Entries Column -->
+        <div class="col-md-8">
+            <!-- Blog Post -->
+            <div class="card mb-4">
+                {% if post.image %}
+                    <img class="card-img-top" src="{{ post.image.url }}" alt="{{ post.title }}" width="750" height="300">
+                {% else% }
+                    <img class="card-img-top" src="{% static '/img/default_750_300.jpg' %}" alt>
+                {% endif %}
+                <div class="card-body">
+                    {% if not post.is_public %}
+                        <h5><span class="badge badge-secondary">Draft</span></h5>
+                    {% endif %}
+                    <h2 class="card-title">{{ post.title }}</h2>
+                    <p class="card-text">
+                        {{ post.content | markdown_to_html }}
+                    </p>
+                </div>
+                <a href="{% url 'blog:blog_detail' post.pk %}" class="btn btn-primary">Read More →
+                </a>
+            </div>
+            <div class="card-footer text-muted">
+                Posted on
+                {{ post.created_at }}
+                by
+                {{ post.user }}
+            </div>
+        </div>
+    {% endif %}
+
+{% empty %}
+        <div class="col-md-8">
+            <!-- Blog Post -->
+            <div class="card mb-4">
+                <img class="card-img-top" src="{% static '/img/default_750_300.jpg' %}" alt="Commin Soon">
+                <div class="card-body">
+                    <h2 class="card-title">Comming Soon</h2>
+                    <p class="card-text">
+                    </p>
+                    <a href="#" class="btn btn-primary disabled">Read More →</a>
+                </div>
+                <div class="card-footer text-muted">
+                </div>
+            </div>
+        </div>
+
+{% endfor %}

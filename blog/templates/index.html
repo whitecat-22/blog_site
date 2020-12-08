@@ -1,0 +1,118 @@
+{% load static %}
+
+<html lang="ja">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shlink-to-fit=no">
+        <meta name="description" content="{% block description %}しろねこプロダクト：自作のサービス紹介やポートフォリオ、ブログを運営していきます。{% endblock %}">
+        <meta name="author" content="">
+
+        <!-- favicon -->
+        <link rel="icon" href="{% static 'img/favicon.ico' %}">
+
+        <title>{% block title %}しろねこブログ{% endblock %}</title>
+
+        <!-- Fontawesome -->
+        <link rel="styleseet" href="https://use/fontawesome.com/releases/v5.15.1/css/all.css">
+
+        <!-- Bootstrap core CSS -->
+        <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+        <!-- Custom styles for this templates -->
+<!--
+        <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+-->
+
+        <!-- Custom styles for this template -->
+        <link href="{% static 'css/modern-business.css' %}" rel="stylesheet">
+
+        <link href="{% static 'css/mystyle.css' %}" type="text/css" rel="stylesheet">
+
+        {% block head %}{% endblock %}
+    </head>
+
+    <body>
+        <div id="wrapper">
+            <!-- Navigation -->
+            {% include "snippets/nav_bar.html" %}
+
+    <header>
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner" role="listbox">
+
+            <!-- Slide One - Set the background image for this slide in the line below -->
+            <div class="carousel-item active" style="background-image: url(static/img/andy-holmes-rCbdp8VCYhQ-unsplash.jpg)">
+                <div class="carousel-caption d-none d-md-block">
+                    <h3>？しろねこ？</h3>
+                    <p>へび遣いを目指して邁進中！</p>
+                </div>
+            </div>
+
+            <!-- Slide Two - Set the background image for this slide in the line below -->
+<!--            <div class="carousel-item" style="background-image: url('http://placehold.it/1900x1080')"> -->
+                <div class="carousel-item" style="background-image: url(static/img/mason-kimbarovsky--GlDIYT3qSc-unsplash.jpg)">
+                <div class="carousel-caption d-none d-md-block">
+                    <h3>しろねこプロダクト</h3>
+                    <p>今後しろねこの制作物を順次掲載していきます</p>
+                </div>
+            </div>
+
+            <!-- Slide Three - Set the background image for this slide in the line below -->
+            <div class="carousel-item" style="background-image: url(static/img/smit-shah-I-U97OozkGs-unsplash.jpg)">
+                <div class="carousel-caption d-none d-md-block">
+                    <h3>しろねこブログ</h3>
+                    <p>徒然なるままに 日暮らし 画面にむかひて 心にうつりゆくよしなしごとを そこはかとなく書きつくれば あやしうこそものぐるほしけれ</p>
+                </div>
+            </div>
+        </div>
+
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+</header>
+
+
+<!-- Page Content -->
+<div class="container">
+
+
+    <!-- Features Section -->
+    {% include "snippets/features_section.html" %}
+
+    <hr>
+    <!-- Call to Action Section -->
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <p>
+                記載内容の不備、誤り等がございましたら、お問い合わせフォームよりご連絡くださいませ。
+            </p>
+        </div>
+        <div class="col-md-4">
+            <a class="btn btn-lg btn-secondary btn-block" href="{% url 'blog:contact' %}" >Contact</a>
+        </div>
+    </div>
+</DIV>
+
+            <!-- Footer -->
+            {% include "snippets/footer.html" %}
+
+            <!-- Bootstrap core JavaScript -->
+            <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+            <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+            <script type="text/javascript" src="https://use.fontawesome.com/releases/v5.15.1/js/conflict-detection.js"></script>
+
+    </body>
+</html>

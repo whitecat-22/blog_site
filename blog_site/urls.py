@@ -45,6 +45,7 @@ urlpatterns = [
     path('pages/', include('django.contrib.flatpages.urls')),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='sitemap'),
     path('latest/feed/', LatestPostsFeed()),
+    path('markdownx/', include('markdownx.urls')),
 ]
 
 if settings.DEBUG:

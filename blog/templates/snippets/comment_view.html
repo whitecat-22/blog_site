@@ -1,0 +1,27 @@
+{% load static %}
+{% load markdown_html %}
+
+<!-- {% for post in object_list %} -->
+{% for comment in post.comments.all %}
+<!-- {% if user.is.authenticated or comment.approved %} -->
+
+<!-- Single Comment -->
+    <div class="media mb-4">
+        <img class="d-flex mr-3 rounded-circle" src="{% static 'img/default_50_50.jpg' %}" alt="">
+        <div class="media-body">
+            <h5 class="mt-0">{{ comment.author }}</h5> -
+            {{ comment.timestamp }}
+<!--            <p>{{ comment.text|linebreaksbr }}</p> -->
+            {{ comment.text | markdown_to_html_with_escape }}
+            {% if user.is.authenticated %}
+                <a href="{% url 'blog_comment_remove' %}" type="button" class="btn btn-danger" id="comment_remove" >Delete</a>
+            {% endif %}
+        </div>
+    </div>
+{% empty %}
+    <div class="media mb-4">
+        <div class="media-body">
+            コメントはまだありません。
+        </div>
+    </div>
+{% endfor %}
