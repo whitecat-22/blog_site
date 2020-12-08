@@ -5,7 +5,7 @@ import os
 from django.conf import settings
 from django.core.management.base import BaseCommand
 
-from ...models import blog
+from ...models import Post
 
 
 class Command(BaseCommand):
@@ -16,7 +16,7 @@ class Command(BaseCommand):
         date = datetime.date.today().strftime("%Y%m%d")
 
         # 保存ファイルの相対パス
-        file_path = settings.BACKUP_PATH + 'diary_' + date + '.csv'
+        file_path = settings.BACKUP_PATH + 'blog_' + date + '.csv'
 
         # 保存ディレクトリが存在しなければ作成する
         os.makedirs(settings.BACKUP_PATH, exist_ok=True)
@@ -26,15 +26,16 @@ class Command(BaseCommand):
             writer = csv.writer(file)
 
             # ヘッダーの書き込み
-            header = [field.name for field in Blog._meta.fields]
+            header = [field.name for field in Post._meta.fields]
             writer.writerow(header)
 
             # Blogテーブルの全データを取得
-            blogs = Blog.objects.all()
+            blogs = Post.objects.all()
 
             # データ部分の書き込み
             for blog in blogs:
                 writer.writerow([str(blog.id,
+#                                 blog.user,
                                  blog.title,
                                  blog.content,
                                  blog.description,

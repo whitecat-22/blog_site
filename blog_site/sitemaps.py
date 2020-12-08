@@ -11,7 +11,7 @@ class BlogPostSitemap(Sitemap):
     ブログ記事のサイトマップ
     """
     changefreq = "never"
-    priority = 0.8
+    priority = 0.5
 
     def items(self):
         return Post.objects.filter(is_public=True)
@@ -28,7 +28,7 @@ class StaticViewSitemap(Sitemap):
     """
     静的ページのサイトマップ
     """
-    changefreq = "daily"
+    changefreq = "blog"
     priority = 0.5
 
     def items(self):

@@ -46,20 +46,20 @@ LOGGING = {
     'loggers': {
         # Djangoが利用するロガー
         'django': {
-            'handlers': ['console'],
+            'handlers': ['file'],
             'level': 'INFO',
         },
 
-        # diaryアプリケーションが利用するロガー
-        'diary': {
-            'handlers': ['console'],
+        # blogアプリケーションが利用するロガー
+        'blog': {
+            'handlers': ['file'],
             'level': 'INFO',
         },
     },
 
     # ハンドラの設定
     'handlers': {
-        'console': {
+        'file': {
             'level': 'INFO',
             'class': 'logging.handlers.TimedRotaitingFileHandler',
             'filename': os.path.join(BASE_DIR, 'logs/django.log'),
@@ -72,7 +72,7 @@ LOGGING = {
 
     # フォーマッタの設定
     'formatters': {
-        'dev': {
+        'prod': {
             'format': '\t'.join([
                 '%(asctime)s',
                 '[%(levelname)s]',

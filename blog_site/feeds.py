@@ -7,12 +7,12 @@ from blog.models import Post
 
 
 class LatestPostsFeed(Feed):
-    title = "MySite 最新ブログ記事"
+    title = "しろねこブログ 最新記事"
     link = "/blog/"
     description = "しろねこ のブログ記事に関する最新情報。"
 
     def items(self):
-        return Post.objects.order_by('-pub_date')[:5]
+        return Post.objects.order_by('-published_at')[:5]
 
     def item_title(self, item):
         return item.title

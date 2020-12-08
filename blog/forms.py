@@ -2,7 +2,7 @@
 
 from django.forms import ModelForm, TextInput, Textarea
 
-from blog.models import Comment, Reply
+from blog.models import Comment  #, Reply
 
 from django import forms
 from django.conf import settings
@@ -31,24 +31,24 @@ class CommentForm(ModelForm):
         }
 
 
-class ReplyForm(ModelForm):
-    class Meta:
-        model = Reply
-        fields = ('author', 'text')
-        widgets = {
-            'author': TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': '名前',
-            }),
-            'text': Textarea(attrs={
-                'class': 'form-control',
-                'placeholder': '返信内容',
-            }),
-        }
-        labels = {
-            'author': '',
-            'text': '',
-        }
+#class ReplyForm(ModelForm):
+#    class Meta:
+#        model = Reply
+#        fields = ('author', 'text')
+#        widgets = {
+#            'author': TextInput(attrs={
+#                'class': 'form-control',
+#                'placeholder': '名前',
+#            }),
+#            'text': Textarea(attrs={
+#                'class': 'form-control',
+#                'placeholder': '返信内容',
+#            }),
+#        }
+#        labels = {
+#            'author': '',
+#            'text': '',
+#        }
 
 
 

@@ -8,7 +8,7 @@ from django.db.models import Count, Q
 from django.http import Http404
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
-from blog.models import Post, Category, Tag, Comment, Reply
+from blog.models import Post, Category, Tag, Comment   # Reply
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic.edit import CreateView
@@ -125,11 +125,11 @@ class CommentFormView(CreateView):
         return context
 
 
-@login_required
-def comment_approve(request, pk):
-    comment = get_object_or_404(Comment, pk=pk)
-    comment.approve()
-    return redirect('blog:post_detail', pk=comment.post.pk)
+#@login_required
+#def comment_approve(request, pk):
+#    comment = get_object_or_404(Comment, pk=pk)
+#    comment.approve()
+#    return redirect('blog:post_detail', pk=comment.post.pk)
 
 
 @login_required
@@ -139,36 +139,36 @@ def comment_remove(request, pk):
     return redirect('blog:post_detail', pk=comment.post.pk)
 
 
-class ReplyFormView(CreateView):
-    model = Reply
-    form_class = ReplyForm
-
-    def form_valid(self, form):
-        reply = form.save(commit=False)
-        comment_pk = self.kwargs['pk']
-        reply.comment = get_object_or_404(Comment, pk=comment_pk)
-        reply.save()
-        return redirect('blog:post_detail', pk=reply.comment.post.pk)
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        comment_pk = self.kwargs['pk']
-        context['comment'] = get_object_or_404(Comment, pk=comment_pk)
-        return context
-
-
-@login_required
-def reply_approve(request, pk):
-    reply = get_object_or_404(Reply, pk=pk)
-    reply.approve()
-    return redirect('blog:post_detail', pk=reply.comment.post.pk)
-
-
-@login_required
-def reply_remove(request, pk):
-    reply = get_object_or_404(Reply, pk=pk)
-    reply.delete()
-    return redirect('blog:post_detail', pk=reply.comment.post.pk)
+#class ReplyFormView(CreateView):
+#    model = Reply
+#    form_class = ReplyForm
+#
+#    def form_valid(self, form):
+#        reply = form.save(commit=False)
+#        comment_pk = self.kwargs['pk']
+#        reply.comment = get_object_or_404(Comment, pk=comment_pk)
+#        reply.save()
+#        return redirect('blog:post_detail', pk=reply.comment.post.pk)
+#
+#    def get_context_data(self, **kwargs):
+#        context = super().get_context_data(**kwargs)
+#        comment_pk = self.kwargs['pk']
+#        context['comment'] = get_object_or_404(Comment, pk=comment_pk)
+#        return context
+#
+#
+#@login_required
+#def reply_approve(request, pk):
+#    reply = get_object_or_404(Reply, pk=pk)
+#    reply.approve()
+#    return redirect('blog:post_detail', pk=reply.comment.post.pk)
+#
+#
+#@login_required
+#def reply_remove(request, pk):
+#    reply = get_object_or_404(Reply, pk=pk)
+#    reply.delete()
+#    return redirect('blog:post_detail', pk=reply.comment.post.pk)
 
 
 
