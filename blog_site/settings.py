@@ -82,3 +82,23 @@ LOGGING = {
         },
     }
 }
+
+
+# セキュリティ関連設定
+# security.W004
+SECURE_HSTS_SECONDS = 31536000
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+# security.W006
+SECURE_CONTENT_TYPE_NOSNIFF = True
+# security.W007
+SECURE_BROWSER_XSS_FILTER = True
+# security.W008
+SECURE_SSL_REDIRECT = True
+# security.W012
+SESSION_COOKIE_SECURE = True
+# security.W016
+CSRF_COOKIE_SECURE = True
+# security.W019
+X_FRAME_OPTIONS = 'DENY'
+# security.W021
+SECURE_HSTS_PRELOAD = True
