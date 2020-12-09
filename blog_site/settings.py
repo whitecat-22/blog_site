@@ -61,7 +61,7 @@ LOGGING = {
     'handlers': {
         'file': {
             'level': 'INFO',
-            'class': 'logging.handlers.TimedRotaitingFileHandler',
+            'class': 'logging.handlers.TimedRotatingFileHandler',
             'filename': os.path.join(BASE_DIR, 'logs/django.log'),
             'formatter': 'prod',
             'when': 'D',
