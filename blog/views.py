@@ -72,6 +72,9 @@ class TagPostView(ListView):
 
 class PostDetailView(DetailView):
     model = Post
+    slug_field = 'title'
+    slug_url_kwarg = 'title'
+    template_name = 'blog_detail.html'
 
     def get_object(self, queryset=None):
         obj = super().get_object(queryset=queryset)
@@ -184,18 +187,20 @@ def comment_remove(request, pk):
 class ContactFormView(FormView):
     template_name = 'contact.html'
     form_class = ContactForm
-    success_url = '/contact_result/'
+#    success_url = '/contact_result/'
+    success_url = reverse_lazy('blog:contact')
 
     def form_valid(self, form):
         form.send_email()
+        messages.success(self.request, 'メッセージを送信しました。')
         logger.info('Inquiry sent by {}'.format(form.cleaned_data['name']))
         return super().form_valid(form)
 
 
-class ContactResultView(TemplateView):
-    template_name = 'contact_result.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['success'] = "お問い合わせは正常に送信されました。"
-        return context
+#class ContactResultView(TemplateView):
+#    template_name = 'contact_result.html'
+#
+#    def get_context_data(self, **kwargs):
+#        context = super().get_context_data(**kwargs)
+#        context['success'] = "お問い合わせは正常に送信されました。"
+#        return context

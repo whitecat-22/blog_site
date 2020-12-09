@@ -24,12 +24,17 @@
             <!-- 登録されたカテゴリが複数表示される -->
                 <div class="col-lg-6">
                     <ul class="list-group list-group-flush">
-                        {% for tag in tags|dictsortreversed:"num_posts"|slice:":1" %}
+                        {% for category in categories|dictsortreversed:"num_posts"|slice:":2" %}
                     <!-- 数の多い順（降順）で並べる -->
                         <li class="list-group-item d-frex justify-content-between align-items-center">
-                            <a href="{% url 'blog:category_post' category.slug %}" class="card-link">{{ category.name }}</a>
+                            {% if category.num_posts > 0 %}
+                                <a href="{% url 'blog:category_post' category.slug %}" class="card-link">{{ category.name }}</a>
+                            {% else %}
+                                <a href="#" class="card-link">{{ category.name }}</a>
+                            {% endif %}
                             <span class="badge badge-primary badge-pill">{{ category.num_posts }}</span>
                         </li>
+                        {% empty %}
                         {% endfor %}
                     </ul>
                 </div>
@@ -45,11 +50,16 @@
                 <!-- 登録されたタグが複数表示される -->
                 <div class="col-lg-6">
                     <ul class="list-group list-group-flush">
-                        {% for tag in tags|dictsortreversed:"num_posts"|slice:":1" %}
+                        {% for tag in tags|dictsortreversed:"num_posts" %}
                         <li class="list-group-item d-frex justify-content-between align-items-center">
-                            <a href="{% url 'blog:tag_post' tag.slug %}" class="card-link">{{ tag.name }}</a>
+                            {% if tag.num_posts > 0 %}
+                                <a href="{% url 'blog:tag_post' tag.slug %}" class="card-link">{{ tag.name }}</a>
+                            {% else %}
+                                <a href="#" class="card-link">{{ tag.name }}</a>
+                            {% endif %}
                             <span class="badge badge-primary badge-pill">{{ tag.num_posts }}</span>
                         </li>
+                        {% empty %}
                         {% endfor %}
                     </ul>
                 </div>

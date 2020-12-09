@@ -12,7 +12,7 @@
     <h1 class="mt-4 mb-3">Blog List
         <small>ブログ一覧</small>
     </h1>
-    <ol class="breadcrumbs">
+    <ol class="breadcrumb">
         <li class="breadcrumb-item">
             <a href="{% url 'blog:index' %}">Home</a>
         </li>
@@ -34,14 +34,12 @@
     <div class="row">
         <!-- Blog Entries Column -->
         {% include "snippets/blog_list.html" %}
-    </div>
 
-    <!-- Pagination -->
-    {% include "snippets/pagination.html" %}
+        <!-- Pagination -->
+        {% include "snippets/pagination.html" %}
 
-    <!-- Sidebar widget Column -->
-    <div class="col-md-4">
+        <!-- Sidebar widget Column -->
         {% include "snippets/side_widget.html" %}
     </div>
-
+</div>
 {% endblock}
