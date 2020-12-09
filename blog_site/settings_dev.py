@@ -48,8 +48,8 @@ LOGGING = {
             'level': 'INFO',
         },
 
-        # diaryアプリケーションが利用するロガー
-        'diary': {
+        # blogアプリケーションが利用するロガー
+        'blog': {
             'handlers': ['console'],
             'level': 'DEBUG',
         },
