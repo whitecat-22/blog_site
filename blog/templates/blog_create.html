@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<!-- highlight.js関連の読み込み -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+
+const elements = document.getElementsByClassName('markdownx');
+for (element of elements) {
+    element.addEventListener('markdownx.update', event => {
+        for (const block of document.querySelectorAll('pre code')) {
+            hljs.highlightBlock(block);
+        }
+    });
+}
+</script>
+
+
+{% block title %}ブログ作成 | {{ block.super }}{% endblock %}
+
+{% block description %}しろねこのブログの執筆用フォーム画面です。{% endblock %}
+
+{% block active_blog_list %}active{% endblock %}
+
+<div class="container">
+    <!-- Page Heading/Breadcrumbs -->
+    <h1 class="mt-4 mb-3">Write Blogs
+        <small>- Draft -</small>
+    </h1>
+
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="{% url 'blog:index' %}">Home</a>
+        </li>
+        <li class="breadcrumb-item active">Write Blogs</li>
+    </ol>
+
+    <!-- Blog Form -->
+    <div class="row">
+        <div class="col-lg-8 mb-4">
+            <h3>Form</h3>
+            <form name="createBrog" id="BlogCreateForm" novalidate="" action="" method="POST" enctype='multipart/formdata'>
+                {% csrf_token %}
+                <table class="table">
+                {{ form.as_table }}
+                <div class="control-group form-group">
+                    <div class="controls">
+                        <label>Title:</label>
+                        <input type="text" class="form-control" id="name" required="" data-validation-required-message="Please enter your title.">
+                        <p class="help-block"></p>
+                    </div>
+                </div>
+                <div class="control-group form-group">
+                    <div class="controls">
+                        <label>Category:</label>
+                        <input type="text" class="form-control" id="category" required="" data-validation-required-message="Please enter your category.">
+                        <p class="help-block"></p>
+                    </div>
+                </div>
+                <div class="control-group form-group">
+                    <div class="controls">
+                        <label>Tag:</label>
+                        <input autocomplete="off" id="tags" placeholder="プログラミング技術に関連するタグをスペース区切りで5つまで入力（例: Ruby Rails）" tabindex="20" type="text" class="css-1w8ot9c ed5758y1" value="" style="background: transparent;">
+                        <p class="help-block"></p>
+                    </div>
+                </div>
+                <div class="control-group form-group">
+                    <div class="controls">
+                        <label>Content:</label>
+                        <textarea id="contents" placeholder="プログラミング知識をMarkdown記法で書いて共有しよう" tabindex="30" class="css-tz5w8o e1u1mup110" style="overflow: hidden; overflow-wrap: break-word; height: 707px;"></textarea>
+                        {{ form.as_p }}
+                        <div class="help-block"></div>
+                    </div>
+                </div>
+<!--            <div class="control-group form-group">
+                    <div class="controls">
+                        <label>Created_at:</label>
+                        <div class="help-block"></div>
+                    </div>
+                </div>
+                <div class="control-group form-group">
+                    <div class="controls">
+                        <label>Updateted_at:</label>
+                        <div class="help-block"></div>
+                    </div>
+                </div>
+                <div class="control-group form-group">
+                    <div class="controls">
+                        <label>Published_at:</label>
+                        <div class="help-block"></div>
+                    </div>
+                </div>  -->
+                </table>
+
+                <hr>
+
+                <div class="row">
+                    <div class="control-group form-group">
+                        <div class="controls">
+                        <label>Is_public:</label>
+                        <input type="checkbox" id="is_published" aria-label="Is_published" default="False">
+                        <div class="help-block"></div>
+                    </div>
+                </div>
+                <div id="success"></div>
+                    <!-- For success/fail messages -->
+                    <button type="submit" class="btn btn-primary" id="sendContensButton">Post</button>
+                    <button type="submit" class="btn btn-secondary" id="saveContentsButton">Save</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Sidebar Widgets Column -->
+        <div class="col-md-4">
+            {{ form.media }}
+
+            <div class="markdownx">
+                {% include 'django/forms/widgets/textarea.html' %}
+                <div class="markdownx-preview content">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

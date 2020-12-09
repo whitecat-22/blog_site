@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}ブログ一覧 : {% if query %}{{ query }}{% endif %} | {{ block.super }}{% endblock %}
+
+{% block description %}検索ワード「{% if query %}{{ query }}{% endif %}」での検索結果ページです。{% endblock %}
+
+{% block active_contact %}active{% endblock %}
+
+{% block contents %}
+<div class="container">
+    <h1 class="mt-4 mb-3">Blog List
+        <small>ブログ一覧</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="{% url 'blog:index' %}">Home</a>
+        </li>
+        <li class="breadcrumb-item active">
+            Blog List
+        </li>
+        <li class="breadcrumb-item active">
+            {% if query %}
+                【 {{ query }} 】の検索結果：
+            {% endif %}
+            {{ page_obj.start_index }}-{{ page_obj.end_index }}件（{{ paginator.count }}件）
+        </li>
+        <li>
+            {% include "snippets/pagination.html" %}
+        </li>
+    </ol>
+
+    <!-- ブログ検索一覧 新しい順に１ページあたり３本を表示する -->
+    <div class="row">
+        <!-- Blog Entries Column -->
+        {% include "snippets/blog_list.html" %}
+
+        <!-- Pagination -->
+        {% include "snippets/pagination.html" %}
+
+        <!-- Sidebar widget Column -->
+        {% include "snippets/side_widget.html" %}
+    </div>
+</div>
+{% endblock}

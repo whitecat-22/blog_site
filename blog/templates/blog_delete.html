@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<!-- highlight.js関連の読み込み -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+
+const elements = document.getElementsByClassName('markdownx');
+for (element of elements) {
+    element.addEventListener('markdownx.update', event => {
+        for (const block of document.querySelectorAll('pre code')) {
+            hljs.highlightBlock(block);
+        }
+    });
+}
+</script>
+
+
+{% block title %}ブログ削除 | {{ block.super }}{% endblock %}
+
+{% block description %}しろねこのブログの執筆用フォーム画面です。{% endblock %}
+
+{% block active_blog_list %}active{% endblock %}
+
+<div class="container">
+    <!-- Page Heading/Breadcrumbs -->
+    <h1 class="mt-4 mb-3">Write Blogs
+        <small>- Draft -</small>
+    </h1>
+
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="{% url 'blog:index' %}">Home</a>
+        </li>
+        <li class="breadcrumb-item active">Write Blogs</li>
+    </ol>
+
+    <!-- Blog Form -->
+    <div class="row">
+        <div class="col-lg-8 mb-4">
+            <h3>Form</h3>
+            <form name="createBrog" id="BlogCreateForm" novalidate="" action="" method="POST" enctype='multipart/formdata'>
+                {% csrf_token %}
+                <p>本当に削除しますか？</p>
+
+            <hr>
+            <div class="row">
+                <div class="control-group form-group">
+                </div>
+                <div id="success"></div>
+                    <!-- For success/fail messages -->
+                    <button type="submit" class="btn btn-danger" id="deleteContensButton">Delete</button>
+                    <a class="btn btn-light" href="{% url 'blog:blog_detail' object.pk %}" >Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,40 @@
+<!-- Comments Form -->
+<div class="card my-4">
+    <h5 class="card-header">Leave a Comment:</h5>
+    <div class="card-body">
+        <form method="POST">{% csrf_token %}{{ form.as_p }}
+
+            <div class="control-group form-group">
+                <div class="controls">
+                    <label>Full Name * :</label>
+                    <input type="text" class="form-control" id="name" required="" data-validation-required-message="Please enter your name." aria-invalid="false">
+                    <p class="help-block"></p>
+                </div>
+            </div>
+
+            <div class="control-group form-group">
+                <div class="controls">
+                <label>Email Address :</label>
+                <input type="email" class="form-control" id="email" required=""> <!-- data-validation-required-message="Please enter your email address."> -->
+                <div class="help-block">
+                </div>
+            </div>
+
+            <div class="control-group form-group">
+                <div class="controls">
+                    <label>Message * :</label>
+                    <textarea rows="3" class="form-control" id="message" required="" data-validation-required-message="Please enter your comment" maxlength="999" style="resize:none"></textarea>
+                    <div class="help-block">
+                    </div>
+                </div>
+            </div>
+            <div id="success">
+            </div>
+
+            <!-- For success/fail messages -->
+            <button type="submit" class="btn btn-primary" id="submit">Submit</button>
+            <button type="reset" class="btn btn-light" id="cancel">Cancel</button>
+        </form>
+    </div>
+</div>
+

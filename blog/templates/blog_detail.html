@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load markdown_html %}
+
+    <!-- highlight.js関連の読み込み -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+{% block title %}{{ object.title }} | {{ block.super }}{% endblock %}
+
+{% block description %}{{ object.title }}：{{ object.description }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Page Heading/Breadcrumbs -->
+    <h1 class="mt-4 mb-3">Blog</h1>
+
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="{% url 'blog:index' %}">Home</a>
+        </li>
+        <li class="breadcrumb-item active">Blog Detail</li>
+    </ol>
+
+    <div class="row">
+        <!-- Post Content Column -->
+        <div class="col-lg-8">
+            <!-- Preview Image -->
+                {% if object.image %}
+                    <img class="img-fluid rounded" src="{{ post.image.url }}" alt="{{ post.title }}" width="900" height="300">
+                {% else% }
+                    <img class="img-fluid rounded" src="{% static '/img/default_900_300.jpg' %}" alt>
+                {% endif %}
+        <hr>
+        <!-- Title -->
+        {% if not post.is_public %}
+            <h5><span class="badge badge-secondary">Draft</span></h5>
+        {% endif %}
+        <h1 class="mt-4 mb-3">{{ object.title }}</h1>
+
+        <!-- Category/Tag -->
+        <h5><span class="badge badge-dark">{{ object.category.name }}</span></h5>
+        {% for tag in object.tags.all %}
+            <h5><span class="badge badge-info">{{ object.tag.name }}</span></h5>
+        {% endfor %}
+
+        <!-- Date/Time/author -->
+        <p>Posted on {{ object.published_at }} by {{ object.user }}</p>
+        <hr>
+        <!-- Post Content -->
+        {{ object.content | markdown_to_html }}
+        <hr>
+
+        <!-- Comments Form -->
+        {% include "snippets/comment_form.html" %}
+
+        <!-- Single Comment -->
+        {% include "snippets/comment_view.html" %}
+
+        <!-- Sidebar Widgets Column -->
+        {% include "snippets/side_widget.html" %}
+    </div>
+</div>
+{% endblock %}

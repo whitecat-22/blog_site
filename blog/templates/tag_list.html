@@ -1,0 +1,13 @@
+<!-- tag_list.html -->
+{% load static %}
+
+<h1>タグ一覧</h1>
+<ul>
+    {% for tag in object_list %}
+        <li>
+            <a href="{% url 'blog:tag_post' tag.slug %}">{{ tag.name }} ({{ tag.num_posts }})</a>
+        </li>
+    {% empty %}
+        <li>タグはありません。</li>
+    {% endfor %}
+</ul>

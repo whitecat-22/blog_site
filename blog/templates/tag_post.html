@@ -1,0 +1,42 @@
+<!-- tag_post.html -->
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}ブログ一覧 : {{ tag.name }} | {{ block.super }}{% endblock %}
+
+{% block description %}タグ「{{ tag.name }}」での投稿一覧ページです。{% endblock %}
+
+{% block active_contact %}active{% endblock %}
+
+
+{% block contents %}
+<div class="container">
+    <h1 class="mt-4 mb-3">Blog List
+        <small>ブログ一覧</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="{% url 'blog:index' %}">Home</a>
+        </li>
+        <li class="breadcrumb-item active">
+            Blog List
+        </li>
+        <li class="breadcrumb-item active">
+            タグ【 {{ tag.name }} 】での投稿一覧
+        </li>
+    </ol>
+
+    <!-- ブログ検索一覧 新しい順に１ページあたり３本を表示する -->
+    <div class="row">
+        <!-- Blog Entries Column -->
+        {% include "snippets/blog_list.html" %}
+
+        <!-- Pagination -->
+        {% include "snippets/pagination.html" %}
+
+        <!-- Sidebar widget Column -->
+        {% include "snippets/side_widget.html" %}
+    </div>
+</div>
+{% endblock}
