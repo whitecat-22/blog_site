@@ -22,7 +22,7 @@
             <div class="card mb-4">
                 {% if post.image %}
                     <img class="card-img-top" src="{{ post.image.url }}" alt="{{ post.title }}" width="750" height="300">
-                {% else% }
+                {% else %}
                     <img class="card-img-top" src="{% static '/img/default_750_300.jpg' %}" alt>
                 {% endif %}
                 <div class="card-body">
