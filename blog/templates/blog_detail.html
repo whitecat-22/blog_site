@@ -12,7 +12,7 @@
 
 {% block description %}{{ object.title }}：{{ object.description }}{% endblock %}
 
-{% block content %}
+{% block contents %}
 <div class="container">
     <!-- Page Heading/Breadcrumbs -->
     <h1 class="mt-4 mb-3">Blog</h1>
@@ -50,7 +50,9 @@
         <p>Posted on {{ object.published_at }} by {{ object.user }}</p>
         <hr>
         <!-- Post Content -->
-        {{ object.content | markdown_to_html }}
+        <div class="markdownx">
+            {{ object.content | markdown_to_html }}
+        </div>
         <hr>
 
         <!-- Comments Form -->
@@ -63,4 +65,10 @@
         {% include "snippets/side_widget.html" %}
     </div>
 </div>
+
+<!-- highlight.js関連の読み込み -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
 {% endblock %}

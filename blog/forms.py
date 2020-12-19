@@ -2,13 +2,18 @@
 
 from django.forms import ModelForm, TextInput, Textarea
 
-from blog.models import Comment  #, Reply
+from blog.models import Comment, Post  #, Reply
 
 from django import forms
+
+from . import models
+
 from django.conf import settings
 from django.core.mail import BadHeaderError, send_mail, EmailMessage
 from django.http import HttpResponse
 
+from markdownx.widgets import MarkdownxWidget
+from markdownx.fields import MarkdownxFormField
 
 
 class CommentForm(ModelForm):
@@ -94,3 +99,20 @@ class ContactForm(forms.Form):
             message.send()
         except BadHeaderError:
             return HttpResponse("無効なヘッダが検出されました。")
+
+
+class BlogCreateForm(forms.Form):
+
+    class Meta:
+        model = Post
+        fields = ('title', 'category', 'tag', 'content', 'description', 'published_at', 'is_public')
+        category = forms.ModelChoiceField(models.Category.objects, label="Category:", empty_label="選択してください", to_field_name="category")
+        tag = forms.ModelMultipleChoiceField(models.Tag.objects, label="Tag:", to_field_name="tag")
+        widgets = {
+            'content' : MarkdownxWidget(attrs={'class': 'textarea'})
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs['class'] = 'form-control'

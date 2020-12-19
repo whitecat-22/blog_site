@@ -23,6 +23,7 @@ for (element of elements) {
 
 {% block active_blog_list %}active{% endblock %}
 
+{% block contents %}
 <div class="container">
     <!-- Page Heading/Breadcrumbs -->
     <h1 class="mt-4 mb-3">Write Blogs
@@ -116,6 +117,20 @@ for (element of elements) {
         <!-- Sidebar Widgets Column -->
         <div class="col-md-4">
             {{ form.media }}
+
+            <!-- highlight.js関連の読み込み -->
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css">
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+            <script>
+            const elements = document.getElementsByClassName('markdownx');
+            for (element of elements) {
+                element.addEventListener('markdownx.update', event => {
+                    for (const block of document.querySelectorAll('pre code')) {
+                        hljs.highlightBlock(block);
+                    }
+                });
+            }
+            </script>
 
             <div class="markdownx">
                 {% include 'django/forms/widgets/textarea.html' %}

@@ -17,6 +17,7 @@ from blog.views import (
     SearchPostView,
     TagListView,
     TagPostView,
+    BlogCreateFormView,
 )
 
 from django.contrib.flatpages import views
@@ -45,4 +46,5 @@ urlpatterns = [
     path('tag/<str:tag_slug>/', TagPostView.as_view(), name='tag_post'),
     path('contact/', ContactFormView.as_view(), name='contact'),
 #    path('contact_result/', ContactResultView.as_view(), name='contact_result'),
+    path('blog/create/', BlogCreateFormView.as_view(), name='blog_create'),
 ]

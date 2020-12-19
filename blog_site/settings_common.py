@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.sitemaps',
     'django.contrib.flatpages',
+    'django.forms',
     'markdownx',
 ]
 
@@ -145,3 +146,19 @@ STATICFILES_DIRS = [
 # バックアップ用
 BACKUP_PATH ="backup/"
 NUM_SAVED_BACKUP = 30
+
+
+# ウィジェットテンプレートを上書きするための設定
+FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'
+
+# 見出しを使う場合は、tocを入れましょう。
+MARKDOWNX_MARKDOWN_EXTENSIONS = [
+    'markdown.extensions.toc',
+]
+MARKDOWNX_MARKDOWN_EXTENSIONS = [
+    'markdown.extensions.extra',  # Fenced Code Blocksは、これに含まれている
+    'markdown.extensions.toc',
+]
+
+# 2000, 2000 ぐらいの画像まではリサイズさせない。
+MARKDOWNX_IMAGE_MAX_SIZE = {'size': (2000, 2000), 'quality': 100}

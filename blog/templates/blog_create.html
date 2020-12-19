@@ -23,6 +23,12 @@ for (element of elements) {
 
 {% block active_blog_list %}active{% endblock %}
 
+{% block head %}
+<script src="/static/admin/js/calendar.js"></script>
+<script src="/static/admin/js/admin/DateTimeShortcuts.js"></script>
+{% endblock %}
+
+{% block contents %}
 <div class="container">
     <!-- Page Heading/Breadcrumbs -->
     <h1 class="mt-4 mb-3">Write Blogs
@@ -46,74 +52,124 @@ for (element of elements) {
                 {{ form.as_table }}
                 <div class="control-group form-group">
                     <div class="controls">
-                        <label>Title:</label>
-                        <input type="text" class="form-control" id="name" required="" data-validation-required-message="Please enter your title.">
+                        <label class="required" for="id_category">Category:</label>
+                        <div class="releted-widget-wrapper">
+                            <select name="category" required id="id_category">
+<!--                                <option value selected>--------</option> -->
+                            </select>
+                        </div>
                         <p class="help-block"></p>
                     </div>
                 </div>
+
                 <div class="control-group form-group">
                     <div class="controls">
-                        <label>Category:</label>
-                        <input type="text" class="form-control" id="category" required="" data-validation-required-message="Please enter your category.">
-                        <p class="help-block"></p>
+                        <label for="id_tags">Tag:</label>
+                        <div class="related-widget-wrapper">
+                            <select name="tags" id="id_tags" multiple>
+<!--                                <option value="1">Python</option> -->
+                            </select>
+                        </div>
+                        <div class="help">
+                            複数選択するときには Control キーを押したまま選択してください。Mac は Command キーを使ってください。
+                        </div>
                     </div>
                 </div>
+
                 <div class="control-group form-group">
                     <div class="controls">
-                        <label>Tag:</label>
-                        <input autocomplete="off" id="tags" placeholder="プログラミング技術に関連するタグをスペース区切りで5つまで入力（例: Ruby Rails）" tabindex="20" type="text" class="css-1w8ot9c ed5758y1" value="" style="background: transparent;">
-                        <p class="help-block"></p>
+                        <label class="required" for="id_title">Title:</label>
+                        <input type="text" name="title" class="vTextField" maxlength="255" required="id_title">
                     </div>
                 </div>
+
                 <div class="control-group form-group">
                     <div class="controls">
-                        <label>Content:</label>
-                        <textarea id="contents" placeholder="プログラミング知識をMarkdown記法で書いて共有しよう" tabindex="30" class="css-tz5w8o e1u1mup110" style="overflow: hidden; overflow-wrap: break-word; height: 707px;"></textarea>
+                        <label class="required" for="id_content">Content:</label>
+                        <div class="markdownx">
+                            <textarea name="content" cols="40" rows="10" class="vLargeTextField markdownx-editor markdownx-editor" required id="id_content" data-markdownx-editor-resizable data-markdownx-urls-path="/markdownx/markdownify/" data-markdownx-upload-urls-path="/markdownx/upload/" data-markdownx-latency="500" data-markdownx-init style="transition: opacity 1s ease 0s;"></textarea>
                         {{ form.as_p }}
-                        <div class="help-block"></div>
+                        {{ form.media }}
+                            <div class="markdownx-preview"></div>
                     </div>
                 </div>
-<!--            <div class="control-group form-group">
-                    <div class="controls">
-                        <label>Created_at:</label>
-                        <div class="help-block"></div>
-                    </div>
-                </div>
+
                 <div class="control-group form-group">
                     <div class="controls">
-                        <label>Updateted_at:</label>
-                        <div class="help-block"></div>
+                        <label class="required" for="id_description">Description:</label>
+                        <textarea name="description" cols="40" rows="10" class="vLargeTextField" id="id_description"></textarea>
                     </div>
                 </div>
+
                 <div class="control-group form-group">
                     <div class="controls">
-                        <label>Published_at:</label>
-                        <div class="help-block"></div>
+                        <label for="id_published_at_0">Published_at:</label>
+                        <p class="datetime">日付：
+                            <input type="text" name="publiched_at_0" class="vDateField" size="10" id="id_published_at_0">
+                            <span class="datetimeshortcuts">
+                                &nbsp;
+                                <a href="#">今日</a>
+                                &nbsp;|&nbsp;
+                                <a href="#" id="calendarlink0">
+                                    <span class="date-icon" title="日付を選択"><i class="far fa-calendar-alt"></i></span>
+                                </a>
+                            </span>
+                            <br>
+                            時刻：
+                            <input type="text" name="published_at_1" class="vTimeField" size="8" id="id_published_at_1">
+                            <span class="datetimeshortcuts">
+                                &nbsp;
+                                <a href="#">現在</a>
+                                &nbsp;|&nbsp;
+                                <a href="#" id="clocklink0">
+                                    <span class="clock-icon" title="時間を選択"><i class="far fa-clock"></i></span>
+                                </a>
+                            </span>
+                        </p>
                     </div>
-                </div>  -->
+                </div>
+
+                <div class="control-group form-group">
+                    <div class="controls">
+                        <label class="vCheckbocLabel" for="id_is_public">Is_public:</label>
+                        <input type="checkbox" name="is_public" id="id_is_public" aria-label="Is_published" default="False">
+                    </div>
+                </div>
+
+                <div class="control-group form-group">
+                    <div class="controls">
+                        <label for="id_image">Image:</label>
+                        <input type="file" name="image" accept="image/*" id="id_image">
+                    </div>
+                </div>
+
+                <div class="submit-row">
+                    <div id="success"></div>
+                        <!-- For success/fail messages -->
+                        <input type="submit" class="btn btn-primary" name="_post" id="sendContensButton"></input>
+                    </div>
+                </div>
                 </table>
-
-                <hr>
-
-                <div class="row">
-                    <div class="control-group form-group">
-                        <div class="controls">
-                        <label>Is_public:</label>
-                        <input type="checkbox" id="is_published" aria-label="Is_published" default="False">
-                        <div class="help-block"></div>
-                    </div>
-                </div>
-                <div id="success"></div>
-                    <!-- For success/fail messages -->
-                    <button type="submit" class="btn btn-primary" id="sendContensButton">Post</button>
-                    <button type="submit" class="btn btn-secondary" id="saveContentsButton">Save</button>
-                </div>
             </form>
         </div>
 
         <!-- Sidebar Widgets Column -->
         <div class="col-md-4">
             {{ form.media }}
+
+            <!-- highlight.js関連の読み込み -->
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css">
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+            <script>
+            const elements = document.getElementsByClassName('markdownx');
+            for (element of elements) {
+                element.addEventListener('markdownx.update', event => {
+                    for (const block of document.querySelectorAll('pre code')) {
+                        hljs.highlightBlock(block);
+                    }
+                });
+            }
+            </script>
 
             <div class="markdownx">
                 {% include 'django/forms/widgets/textarea.html' %}
@@ -123,4 +179,10 @@ for (element of elements) {
         </div>
     </div>
 </div>
+
+
+<div class="calendarbox module" id="calendarbox0" style="display: none; position: absolute; left: 712px; top: 786px;"><div><a href="#" class="calendarnav-previous">&lt;</a><a href="#" class="calendarnav-next">&gt;</a></div><div id="calendarin0" class="calendar"><table><caption>12月 2020</caption><tbody><tr><th>日</th><th>月</th><th>火</th><th>水</th><th>木</th><th>金</th><th>土</th></tr><tr><td class="nonday"> </td><td class="nonday"> </td><td class=""><a href="#">1</a></td><td class=""><a href="#">2</a></td><td class=""><a href="#">3</a></td><td class=""><a href="#">4</a></td><td class=""><a href="#">5</a></td></tr><tr><td class=""><a href="#">6</a></td><td class=""><a href="#">7</a></td><td class=""><a href="#">8</a></td><td class=""><a href="#">9</a></td><td class=""><a href="#">10</a></td><td class=""><a href="#">11</a></td><td class=""><a href="#">12</a></td></tr><tr><td class=""><a href="#">13</a></td><td class=""><a href="#">14</a></td><td class=""><a href="#">15</a></td><td class=""><a href="#">16</a></td><td class=""><a href="#">17</a></td><td class=""><a href="#">18</a></td><td class="today"><a href="#">19</a></td></tr><tr><td class=""><a href="#">20</a></td><td class=""><a href="#">21</a></td><td class=""><a href="#">22</a></td><td class=""><a href="#">23</a></td><td class=""><a href="#">24</a></td><td class=""><a href="#">25</a></td><td class=""><a href="#">26</a></td></tr><tr><td class=""><a href="#">27</a></td><td class=""><a href="#">28</a></td><td class=""><a href="#">29</a></td><td class=""><a href="#">30</a></td><td class="selected"><a href="#">31</a></td><td class="nonday"> </td><td class="nonday"> </td></tr></tbody></table></div><div class="calendar-shortcuts"><a href="#">昨日</a>&nbsp;|&nbsp;<a href="#">今日</a>&nbsp;|&nbsp;<a href="#">明日</a></div><p class="calendar-cancel"><a href="#">キャンセル</a></p></div>
+
+<div class="clockbox module" id="clockbox0" style="display: block; position: absolute; left: 690px; top: 862px;"><h2>時間を選択</h2><ul class="timelist"><li><a href="#">現在</a></li><li><a href="#">0時</a></li><li><a href="#">午前 6 時</a></li><li><a href="#">12時</a></li><li><a href="#">午後 6 時</a></li></ul><p class="calendar-cancel"><a href="#">キャンセル</a></p></div>
+
 {% endblock %}

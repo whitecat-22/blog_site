@@ -3,6 +3,10 @@
 from django.db import models
 from django.utils import timezone
 
+from django.contrib.sitemaps import ping_google
+
+from markdownx.models import MarkdownxField
+
 
 class Category(models.Model):
     name = models.CharField(max_length=255)
@@ -26,7 +30,7 @@ class Post(models.Model):
     category = models.ForeignKey(Category, on_delete=models.PROTECT)
     tags = models.ManyToManyField(Tag, blank=True)
     title = models.CharField(max_length=255)
-    content = models.TextField()
+    content = MarkdownxField()
     description = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -36,6 +40,10 @@ class Post(models.Model):
         upload_to='post_images/', null=True, blank=True
         )
 
+    """ カスタムメソッド """
+    def get_text_markdownx(self):
+        return mark_safe(markdownify(self.text))
+
     class Meta:
         ordering = ['-created_at']
 
@@ -43,6 +51,11 @@ class Post(models.Model):
         if self.is_public and not self.published_at:
             self.published_at = timezone.now()
         super().save(*args, **kwargs)
+
+        try:
+            ping_google()
+        except Exception:
+            pass
 
     def __str__(self):
         return self.title

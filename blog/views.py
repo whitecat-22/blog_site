@@ -12,7 +12,7 @@ from blog.models import Post, Category, Tag, Comment   # Reply
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic.edit import CreateView
-from blog.forms import CommentForm  #ReplyForm
+from blog.forms import CommentForm, BlogCreateForm  #ReplyForm
 
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView
@@ -204,3 +204,17 @@ class ContactFormView(FormView):
 #        context = super().get_context_data(**kwargs)
 #        context['success'] = "お問い合わせは正常に送信されました。"
 #        return context
+
+
+class BlogCreateFormView(FormView):
+    template_name = 'blog_create.html'
+    form_class = BlogCreateForm
+
+#    success_url = '/blog_create/'
+    success_url = reverse_lazy('blog:blog_create')
+
+    def form_valid(self, form):
+        form.send_email()
+        messages.success(self.request, 'ブログを投稿しました。')
+        logger.info('Blog sent by {}'.format(form.cleaned_data['title', 'category', 'tag', 'content', 'description', 'created_at', 'updated_at', 'published_at', 'is_public']))
+        return super().form_valid(form)
