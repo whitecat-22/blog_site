@@ -12,6 +12,8 @@
 
 {% block description %}{{ object.title }}：{{ object.description }}{% endblock %}
 
+{% block active_contact %}active{% endblock %}
+
 {% block contents %}
 <div class="container">
     <!-- Page Heading/Breadcrumbs -->
@@ -28,47 +30,47 @@
         <!-- Post Content Column -->
         <div class="col-lg-8">
             <!-- Preview Image -->
-                {% if object.image %}
+                {% if post.image %}
                     <img class="img-fluid rounded" src="{{ post.image.url }}" alt="{{ post.title }}" width="900" height="300">
                 {% else %}
                     <img class="img-fluid rounded" src="{% static '/img/default_900_300.jpg' %}" alt>
                 {% endif %}
-        <hr>
-        <!-- Title -->
-        {% if not post.is_public %}
-            <h5><span class="badge badge-secondary">Draft</span></h5>
-        {% endif %}
-        <h1 class="mt-4 mb-3">{{ object.title }}</h1>
+            <hr>
+            <!-- Title -->
+            {% if not post.is_public %}
+                <h5><span class="badge badge-secondary">Draft</span></h5>
+            {% endif %}
+            <h1 class="mt-4 mb-3">{{ post.title }}</h1>
 
-        <!-- Category/Tag -->
-        <h5><span class="badge badge-dark">{{ object.category.name }}</span></h5>
-        {% for tag in object.tags.all %}
-            <h5><span class="badge badge-info">{{ object.tag.name }}</span></h5>
-        {% endfor %}
+            <!-- Category/Tag -->
+            <h5><span class="badge badge-dark">{{ post.category.name }}</span></h5>
+            {% for tag in post.tags.all %}
+                <h5><span class="badge badge-info">{{ post.tag.name }}</span></h5>
+            {% endfor %}
+            <hr>
 
-        <!-- Date/Time/author -->
-        <p>Posted on {{ object.published_at }} by {{ object.user }}</p>
-        <hr>
-        <!-- Post Content -->
-        <div class="markdownx">
-            {{ object.content | markdown_to_html }}
+            <!-- Date/Time/author -->
+            <p>Posted on {{ post.published_at }} by {{ post.user }}</p>
+            <hr>
+            <!-- Post Content -->
+            <div class="markdownx">
+                {{ post.content | markdown_to_html }}
+            </div>
+            <hr>
+
+            <!-- Comments Form -->
+            {% include "snippets/comment_form.html" %}
+
+            <!-- Single Comment -->
+            {% include "snippets/comment_view.html" %}
+
         </div>
-        <hr>
 
-        <!-- Comments Form -->
-        {% include "snippets/comment_form.html" %}
-
-        <!-- Single Comment -->
-        {% include "snippets/comment_view.html" %}
-
-        <!-- Sidebar Widgets Column -->
-        {% include "snippets/side_widget.html" %}
+        <div class="col-md-4">
+            <!-- Sidebar Widgets Column -->
+            {% include "snippets/side_widget.html" %}
+        </div>
     </div>
 </div>
-
-<!-- highlight.js関連の読み込み -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
 
 {% endblock %}

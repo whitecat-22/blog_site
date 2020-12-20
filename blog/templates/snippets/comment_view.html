@@ -1,9 +1,7 @@
 {% load static %}
 {% load markdown_html %}
 
-<!-- {% for post in object_list %} -->
 {% for comment in post.comments.all %}
-<!-- {% if user.is.authenticated or comment.approved %} -->
 
 <!-- Single Comment -->
     <div class="media mb-4">
@@ -18,10 +16,12 @@
             {% endif %}
         </div>
     </div>
+
 {% empty %}
     <div class="media mb-4">
+        <img class="d-flex mr-3 rounded-circle" src="{% static 'img/default_50_50.jpg' %}" alt="">
         <div class="media-body">
-            コメントはまだありません。
+            <p>コメントはまだありません。</p>
         </div>
     </div>
 {% endfor %}
