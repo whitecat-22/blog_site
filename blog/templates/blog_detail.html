@@ -43,14 +43,15 @@
             <h1 class="mt-4 mb-3">{{ post.title }}</h1>
 
             <!-- Category/Tag -->
-            <h5><span class="badge badge-dark">{{ post.category.name }}</span></h5>
+            <h5><span class="badge badge-dark">{{ post.category.name }}</span>
             {% for tag in post.tags.all %}
-                <h5><span class="badge badge-info">{{ post.tag.name }}</span></h5>
+                <span class="badge badge-info">{{ tag.name }}</span>
             {% endfor %}
+            </h5>
             <hr>
 
             <!-- Date/Time/author -->
-            <p>Posted on {{ post.published_at }} by {{ post.user }}</p>
+            <p>Posted on {{ post.published_at }}</p>
             <hr>
             <!-- Post Content -->
             <div class="markdownx">
@@ -72,5 +73,4 @@
         </div>
     </div>
 </div>
-
 {% endblock %}

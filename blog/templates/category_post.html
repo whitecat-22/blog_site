@@ -29,13 +29,17 @@
     <!-- ブログ検索一覧 新しい順に１ページあたり３本を表示する -->
     <div class="row">
         <!-- Blog Entries Column -->
-        {% include "snippets/blog_list.html" %}
+        <div class="col-md-8">
+            <!-- Blog Post -->
+            {% include "snippets/blog_list.html" %}
 
-        <!-- Pagination -->
-        {% include "snippets/pagination.html" %}
-
-        <!-- Sidebar widget Column -->
-        {% include "snippets/side_widget.html" %}
+            <!-- Pagination -->
+            {% include "snippets/pagination.html" %}
+        </div>
+        <div class="col-md-4">
+            <!-- Sidebar widget Column -->
+            {% include "snippets/side_widget.html" %}
+        </div>
     </div>
 </div>
 {% endblock}
