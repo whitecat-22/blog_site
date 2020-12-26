@@ -38,10 +38,10 @@
                         <span class="badge badge-info">{{ tag.name }}</span>
                     {% endfor %}
                     </h5>
-                    <p class="card-text">
+<!--                    <p class="card-text">
                         {{ post.content | markdown_to_html }}
-                    </p>
-                    <a href="{% url 'blog:blog_detail' post.pk %}" class="btn btn-primary">Read More →
+                    </p> -->
+                    <a href="{% url 'blog:blog_detail' post.pk %}" class="btn btn-secondary">Read More →
                     </a>
                 </div>
 
@@ -63,7 +63,7 @@
                     <h2 class="card-title">Comming Soon</h2>
                     <p class="card-text">
                     </p>
-                    <a href="#" class="btn btn-primary disabled">Read More →</a>
+                    <a href="#" class="btn btn-secondary disabled">Read More →</a>
                 </div>
                 <div class="card-footer text-muted">
                 </div>

@@ -8,7 +8,7 @@
             <div class="input-group">
                 <input type="text" class="form-control" type="serch" name="q" value="{{ request.GET.q }}" placeholder="Search for..." aria-label="Search">
                 <span class="input-group-append">
-                     <button class="btn btn-primary" type="submit" action="{% url 'blog:search_post' %} method="GET">Go!</button>
+                     <button class="btn btn-secondary" type="submit" action="{% url 'blog:search_post' %} method="GET">Go!</button>
                 </span>
             </div>
         </div>
@@ -27,11 +27,13 @@
                     <!-- 数の多い順（降順）で並べる -->
                         <li class="list-group-item d-frex justify-content-between align-items-center">
                             {% if category.num_posts > 0 %}
-                                <a href="{% url 'blog:category_post' category.slug %}" class="card-link">{{ category.name }}</a>
+                                <h5><a href="{% url 'blog:category_post' category.slug %}" class="badge badge-dark" >{{ category.name }}
+                                    <span class="badge badge-light">{{ category.num_posts }}</span>
+                                </a></h5>
                             {% else %}
-                                <a href="#" class="card-link">{{ category.name }}</a>
+                                <h5><a href="#" class="badge badge-dark" >{{ category.name }}
+                                </a></h5>
                             {% endif %}
-                            <span class="badge badge-primary badge-pill">{{ category.num_posts }}</span>
                         </li>
                         {% empty %}
                         {% endfor %}
@@ -52,11 +54,12 @@
                         {% for tag in tags|dictsortreversed:"num_posts" %}
                         <li class="list-group-item d-frex justify-content-between align-items-center">
                             {% if tag.num_posts > 0 %}
-                                <a href="{% url 'blog:tag_post' tag.slug %}" class="card-link">{{ tag.name }}</a>
+                                <h5><a href="{% url 'blog:tag_post' tag.slug %}" class="badge badge-info">{{ tag.name }}
+                                    <span class="badge badge-light">{{ tag.num_posts }}</span>
+                                </a></h5>
                             {% else %}
-                                <a href="#" class="card-link">{{ tag.name }}</a>
+                                <h5><a href="#" class="badge badge-info">{{ tag.name }}</a></h5>
                             {% endif %}
-                            <span class="badge badge-primary badge-pill">{{ tag.num_posts }}</span>
                         </li>
                         {% empty %}
                         {% endfor %}
