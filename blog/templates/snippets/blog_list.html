@@ -33,9 +33,9 @@
                     <h2 class="card-title">{{ post.title }}</h2>
 
                     <!-- Category/Tag -->
-                    <h5><span class="badge badge-dark">{{ post.category.name }}</span>
+                    <h5><a href="{% url 'blog:category_post' post.category.slug %}" class="badge badge-dark" >{{ post.category.name }}</a>
                     {% for tag in post.tags.all %}
-                        <span class="badge badge-info">{{ tag.name }}</span>
+                        <a href="{% url 'blog:tag_post' tag.slug %}" class="badge badge-info">{{ tag.name }}</a>
                     {% endfor %}
                     </h5>
 <!--                    <p class="card-text">

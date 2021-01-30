@@ -220,3 +220,27 @@ class BlogCreateFormView(FormView):
         messages.success(self.request, 'ブログを投稿しました。')
         logger.info('Blog sent by {}'.format(form.cleaned_data['title', 'category', 'tag', 'content', 'description', 'created_at', 'updated_at', 'published_at', 'is_public']))
         return super().form_valid(form)
+
+
+class AboutView(TemplateView):
+    template_name = 'about.html'
+
+
+class ServiceView(TemplateView):
+    template_name = 'service.html'
+
+
+class PortfolioView(TemplateView):
+    template_name = 'portfolio.html'
+
+
+class PrivacyPolicyView(TemplateView):
+    template_name = 'privacy_policy.html'
+
+
+class DisclaimerView(TemplateView):
+    template_name = 'disclaimer.html'
+
+
+class FAQView(TemplateView):
+    template_name = 'FAQ.html'

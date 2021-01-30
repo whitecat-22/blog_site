@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load markdown_html %}
+
+{% block title %}Service | {{ block.super }}{% endblock %}
+
+{% block description %}サービス紹介のページです。{% endblock %}
+
+{% block active_contact %}active{% endblock %}
+
+{% block contents %}
+<div class="container">
+    <h1 class="mt-4 mb-3">
+        Service
+        <small>サービス紹介</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="{% url 'blog:index' %}">Home</a>
+        </li>
+        <li class="breadcrumb-item active">
+            Service
+        </li>
+    </ol>
+
+    <div class="row">
+
+    <!-- コンテンツ -->
+　　Under Constraction !
+
+    </div>
+</div>
+{% endblock %}

@@ -25,9 +25,6 @@
             {% endif %}
             {{ page_obj.start_index }}-{{ page_obj.end_index }}件（{{ paginator.count }}件）
         </li>
-        <li>
-            {% include "snippets/pagination.html" %}
-        </li>
     </ol>
 
     <!-- ブログ検索一覧 新しい順に１ページあたり３本を表示する -->
@@ -47,4 +44,4 @@
         </div>
     </div>
 </div>
-{% endblock}
+{% endblock %}

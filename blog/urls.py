@@ -18,6 +18,12 @@ from blog.views import (
     TagListView,
     TagPostView,
     BlogCreateFormView,
+    AboutView,
+    ServiceView,
+    PortfolioView,
+    PrivacyPolicyView,
+    FAQView,
+    DisclaimerView,
 )
 
 from django.contrib.flatpages import views
@@ -47,4 +53,10 @@ urlpatterns = [
     path('contact/', ContactFormView.as_view(), name='contact'),
 #    path('contact_result/', ContactResultView.as_view(), name='contact_result'),
     path('blog/create/', BlogCreateFormView.as_view(), name='blog_create'),
+    path('about', AboutView.as_view(), name='about'),
+    path('service', ServiceView.as_view(), name='service'),
+    path('portfolio', PortfolioView.as_view(), name='portfolio'),
+    path('privacy_policy', PrivacyPolicyView.as_view(), name='privacy_policy'),
+    path('disclaimer', DisclaimerView.as_view(), name='disclaimer'),
+    path('FAQ', FAQView.as_view(), name='FAQ'),
 ]
