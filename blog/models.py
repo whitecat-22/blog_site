@@ -72,7 +72,7 @@ class Comment(models.Model):
     author = models.CharField(max_length=50)
     text = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
-    approved = models.BooleanField(default=False)
+    approved = models.BooleanField(default=True)
 
     class Meta:
         ordering = ['-timestamp']
@@ -82,6 +82,7 @@ class Comment(models.Model):
 #        self.save()
 
     def __str__(self):
+        self.save()
         return self.text
 
 

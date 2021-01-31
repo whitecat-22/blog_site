@@ -1,7 +1,8 @@
 <div class="col-lg-8 mb-4">
     <h3>Send us a Message</h3>
 
-    <form name="sentMessage" id="contactForm" novalidate="">
+    <form action method="POST" name="sentMessage" id="contactForm" novalidate="">
+        {% csrf_token %}
         <div class="control-group form-group">
             <div class="controls">
                 <label>Full Name:</label>
