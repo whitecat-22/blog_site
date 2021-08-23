@@ -13,6 +13,6 @@
 - Nginx
 - Gunicorn
 - AWS
-  -  EC2
-  - AWS Route53
-  - AWS SES
+  - EC2
+  - Route53
+  - SES
