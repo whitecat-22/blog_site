@@ -12,7 +12,7 @@
 - Django 3.x
 - Nginx
 - Gunicorn
-- AWS
-  - EC2
+- AWS (Amazon Web Services)
+  - EC2 (Elastic Compute Cloud)
   - Route53
-  - SES
+  - SES (Simple Email Service)
