@@ -8,7 +8,7 @@
 ![https://github.com/whitecat-22/blog_site/blob/master/blog/static/img/whitecat.png](https://github.com/whitecat-22/blog_site/blob/master/blog/static/img/whitecat.png)
 　
 
-### 使用技術
+### 使用技術：
 
 - Python 3.x
 - Django 3.x
