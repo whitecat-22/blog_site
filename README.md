@@ -14,7 +14,7 @@
 - Python 3.x
 - [Django](https://www.djangoproject.com/) 3.x
 - [Nginx](https://www.nginx.co.jp/)
-- Gunicorn
+- [Gunicorn](https://gunicorn.org/)
 - AWS (Amazon Web Services)
   - EC2 (Elastic Compute Cloud)
   - Route53
