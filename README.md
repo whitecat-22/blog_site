@@ -11,7 +11,7 @@
 
 ### ◆使用技術：
 
-- Python 3.x
+- [Python](https://www.python.org/) 3.x
 - [Django](https://www.djangoproject.com/) 3.x
 - [Nginx](https://www.nginx.co.jp/)
 - [Gunicorn](https://gunicorn.org/)
