@@ -4,7 +4,7 @@
 
 - https://whitecat-22.ml  
 　　ポートフォリオを掲載予定  
-　　現在は、技術ブログ（Qiita,Zennへのリンクが主）のみ
+　　現在は、技術ブログ（[Qiita](https://qiita.com/_whitecat_22),Zennへのリンクが主）のみ
 
 ![https://github.com/whitecat-22/blog_site/blob/master/blog/static/img/whitecat.png](https://github.com/whitecat-22/blog_site/blob/master/blog/static/img/whitecat.png)
 　
