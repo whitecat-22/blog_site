@@ -25,3 +25,7 @@
 ### ◆参考：
 
 - [【Nginx】Let’sEncryptからのSSL証明書がcertbot-autoで取得できない際の対処](https://qiita.com/_whitecat_22/items/14819ce3d6a41cc0d6b2)
+
+<a href="https://qiita.com/_whitecat_22/items/14819ce3d6a41cc0d6b2">
+  <img src="">
+</a>
