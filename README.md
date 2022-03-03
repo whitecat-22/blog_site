@@ -13,6 +13,7 @@
 
 - [Python](https://www.python.org/) 3.x
 - [Django](https://www.djangoproject.com/) 3.x
+- [PostgreSQL](https://www.postgresql.org/) 13.x
 - [Nginx](https://www.nginx.co.jp/)
 - [Gunicorn](https://gunicorn.org/)
 - AWS (Amazon Web Services)
